@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Makeup Wala Dashboard</title>
+	<style>
+		body { margin: 0; background: #fff5f7; color: #28232a; font-family: Arial, sans-serif; }
+		header { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: #7d263f; color: white; }
+		main { max-width: 960px; margin: 48px auto; padding: 0 24px; }
+		.panel { background: white; padding: 28px; border-radius: 14px; box-shadow: 0 12px 30px rgba(125, 38, 63, .12); }
+		a, button { border: 0; border-radius: 8px; padding: 10px 16px; cursor: pointer; text-decoration: none; }
+		a { background: #e74674; color: white; } button { background: #f7d4de; color: #7d263f; }
+	</style>
+</head>
+<body>
+	<header>
+		<strong>Makeup Wala Admin</strong>
+		<form action="/logout" method="post">
+			<button type="submit">Log out</button>
+		</form>
+	</header>
+	<main>
+		<div class="panel">
+			<h1>Dashboard</h1>
+			<p>Signed in as +<%= admin.mobile %></p>
+			<a href="/profile">View profile</a>
+		</div>
+	</main>
+</body>
+</html>

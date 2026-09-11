@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Makeupwala connects you with trusted makeup artists for every occasion.">
+    <title>Makeupwala | Professional Makeup Artists at Your Doorstep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .hero-slider {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 59%;
+            min-height: 540px;
+            overflow: hidden;
+            border-radius: 0px;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-position: center;
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 700ms ease-in-out;
+        }
+
+        .hero-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(35, 16, 24, .5), transparent 75%);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-ad {
+            position: absolute;
+            z-index: 1;
+            left: 8%;
+            right: auto;
+            bottom: 122px;
+            max-width: 290px;
+            color: #fff;
+        }
+
+        .hero-ad-badge {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #f5b5f6;
+            color: #3a1830;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-ad h2 {
+            margin: 0 0 8px;
+            font-family: "Playfair Display", serif;
+            font-size: 30px;
+            line-height: 1.1;
+        }
+
+        .hero-ad p {
+            margin: 0 0 16px;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .hero-ad-link {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: #fff;
+            color: #cf2c68;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .slider-controls {
+            position: absolute;
+            z-index: 2;
+            right: 20px;
+            bottom: 18px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .55);
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            width: 28px;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide { transition: none; }
+        }
+        .cls-1 {
+        fill: #d92a5e;
+      }
+
+      .cls-2 {
+        fill: #d82a5d;
+      }
+
+      .cls-3 {
+        fill: #d82a5e;
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-5 {
+        fill: #d92b5f;
+      }
+
+      .cls-6 {
+        fill: #d82b5e;
+      }
+
+      .cls-7 {
+        fill: #e0b274;
+      }
+
+      .cls-8 {
+        fill: #da2b5f;
+      }
+
+      .cls-9 {
+        fill: #da2b60;
+      }
+      #Layer_2 {
+        isolation: isolate;
+        height: 50px;
+        position: relative;
+        top: -4px;
+      }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+       
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 504.13 145.02">
+  <defs>
+    
+    <linearGradient id="linear-gradient" x1="17.14" y1="71.41" x2="128.87" y2="71.41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a51d4f"/>
+      <stop offset=".51" stop-color="#f8c2d2"/>
+      <stop offset="1" stop-color="#ef92b4"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="Generative_Object" data-name="Generative Object">
+      <g>
+        <path class="cls-6" d="M161.06,111.71c-1.08.97-3.72.81-5.59.49l-4.24-11.61-13.18-36.67-.05,38.52c0,1.93.29,3.67.78,5.4,1.01,3.56,4.48,2.52,4.84,3.35.13.31.08,1.02-.41,1.02h-12.56c-.49,0-.77-.2-.8-.59-.04-.46.24-.8.82-.79,4.38.08,5.12-5.2,5.12-9.56l-.02-40.67c0-1.52-.8-2.87-1.94-3.71-3.88-2.85-9-2.52-12.64.56-5.7,4.81-5.01,15.73-.14,16.95s7.73-2.19,7.87-.13c-3.27,1.92-7.15,2.88-10.94,2.04-3.35-.75-6.29-2.62-7.83-5.69-1.89-3.78-1.41-8.2.88-11.72,5.09-7.82,16.75-8.96,25.58-7.72,3.28.46,6.31,1.1,9.31,2.35,1.87.78,3.15,2.18,3.36,4.26l6.56,22.84,5.62,18.31,9.39-27.13,5.43-16.42c.43-1.31,2.21-1.95,3.43-1.95l11.18.02c.65,0,1.14.05,1.53.46.35.37.72,1.22.12,1.62l-1.87.29c-1.56.64-2.87,2.32-2.87,4.3l.05,45.92c0,5.44,2.77,10.58,6.58,14.19,8.62,8.16,22.93,7.62,31.96-.22.31-.27.62-.2.83.1.55.76-3.45,4.11-5.65,5.49-4.62,2.9-9.76,4.33-15.29,4.38-7.47.07-14.77-1.96-20.66-6.57-4.9-3.83-8.41-9.37-8.44-15.73l-.17-38.28-7.12,18.27-8.81,24.03Z"/>
+        <path class="cls-3" d="M267.22,112.21l-10.68-.02c-1.41,0-2.56-1.02-3.39-2.03l-1.52-1.84-9.6-14.76v14.11c0,1.45.98,2.74,2.29,2.98.55-.05.89.17,1.01.54.09.26.07,1.02-.41,1.02h-16.1c-.41,0-.5-.41-.53-.6-.03-.3.07-.76.51-.82,1.58-.21,2.66-1.39,2.66-3.12v-46.63c0-3.12-3.14-2.25-2.62-3.89.16-.5.58-.53,1.12-.69l10.49-3.04c.68-.2,1.5.2,1.51.99l.05,34.74,10.17-10.91c.53-.57.65-1.46.42-2.04-.3-.76-1.05-.98-1.94-1.09-.56-.07-.54-1.7.02-1.7l12.72-.07c.6,0,1.03.13,1.16.61.15.53-.08,1.09-.7,1.26-2.28.41-4.3,1.41-5.95,3.07l-8.77,8.82,10.87,17.56c1.11,1.79,2.25,3.38,3.84,4.72,2.24,1.9,4.43.61,3.36,2.83Z"/>
+        <path class="cls-6" d="M412.15,79.44c.36-1.17-.03-2.32-.56-3.1-1.09-1.62-3.36-.69-3.13-2.18.04-.24.13-.81.58-.81h12.26c.41,0,.52.39.58.59.52,1.57-3.1,1.16-4.54,4.41l-2.49,5.6-9.76,27.91c-1.12.72-2.48.6-3.76.18l-7.7-21.18-7.54,21.18c-1.26.44-2.46.44-3.75-.02l-13.05-33.78c-1.5-3.87-4.26-2.39-4-4.07.04-.25.13-.82.59-.82h16.78c.5,0,.55.74.51,1.02-.15,1.05-1.95.54-2.68,2.15-.37.83-.28,1.68.14,2.45l6.65,18.69,4.34-12.44-3.01-8.08c-1.13-2.42-3.17-1.45-3.27-2.77-.02-.31.13-1.02.7-1.02h16.06c.49,0,.55.57.57.81.1,1.45-1.76.57-2.74,2.1-.56.87-.45,1.75-.1,2.71l6.71,18.68,5.6-18.21Z"/>
+        <path class="cls-6" d="M298.26,80.21c-.01-2.64-2.49-2.54-2.69-3.1-.12-.34-.01-.86.4-1.16l10.86-3.63c.28-.15,1.36-.06,1.36.38l.03,28.57.42,3.41c.25,2.04,2.01,3.42,4.12,3.56,3.52.23,6.16-2.91,7.71-6.16l-.07-21.62c0-1.19-.73-2.49-1.7-2.84-.49-.17-.86-.2-1.06-.55-.15-.27-.21-1.05.26-1.2l11.05-3.63c.49-.16,1.31.03,1.31.65l.03,34.31c0,2.37,2.62,1.83,2.74,2.75.08.61-.2.82-.8.92l-9.78,1.77c-.47.09-.89.02-1.25-.21-.33-.21-.53-.65-.55-1.19l-.12-4.13c-3.01,4.27-7.73,6.48-12.87,5.66s-9.26-5.29-9.28-10.83l-.11-21.72Z"/>
+        <g>
+          <g>
+            <path class="cls-9" d="M84.35,131.45c1.68-.83,3.12-1.56,4.29-2.15,1.73-.88,2.22-1.15,2.87-1.63,1.37-1.03,1.57-1.63,2.63-2.53.79-.67,2.06-1.51,4.05-2.04-1.41,1.47-3.25,3.26-5.59,5.07-1.98,1.54-4.07,2.94-6.25,4.28-16.06,9.84-36.75,15.01-55.43,11.44-11.88-2.27-22.72-9.09-27.57-20.33-.74-1.72-1.5-3.25-1.81-5.11,7.64,12.7,25.28,13.34,38.23,9.57,15.48-4.51,28.32-15.07,35.97-29.23,4.17-7.71,6.81-16.07,7.64-24.79l.52-5.41c.09-.91.19-1.75.19-2.64l-.03-4.97-.32,3.1-.15,3.24c-.29,6.34-1.4,12.47-3.16,18.61-4.56,15.89-15.18,29.32-29.79,37.1-8.36,4.45-17.67,6.83-27.15,6.41-7.72-.34-15.46-3.04-20.19-9.16-1.88-2.43-2.94-5.15-3.2-8.23-.38-4.47.39-8.86,2.18-12.96,0,1.72-.31,3.16-.19,4.84.48,6.31,4.82,9.86,11.03,10.54,3.75.41,7.3-.17,10.97-1.19,17-4.73,30.97-18.62,40.05-33.41,3.34-5.44,6.11-10.9,9.1-16.52,2.49-4.69,5.05-9.07,8.49-13.09,8.39-9.77,19.8-15.23,32.56-12.6l-3.38.27c-10.39.82-18.86,8.2-21.39,18.44-.99,3.98-.61,7.9,1.24,11.55,1.09,2.15,1.85,4.35,1.94,6.82.03.9.18,1.74.5,2.56,1.67.34,3.28-.57,3.61-2.16,1.14,1.9-.64,3.38-2.96,4.14,1.7,2.4,3.99,4.1,6.49,5.58l2.97,1.76c.61.36,1.08.84,1.19,1.34.16.73.03,1.41-.46,1.93l-2.29,2.43c-.46.49-.57,1.18-.04,1.61l1.96,1.59c.61.49.9,1.35.3,1.88l-2.04,1.81c.83.34,1.61.33,2.17.86.5.48.27,1.32-.17,1.78-2.33,2.43.24,4.24.52,6.78.5,4.51-4.61,5.14-8.68,5.94-6.14,1.21-9.11,3.59-11.54,9.41-3.36.78-6.66,3.19-9.19,5.78.4-.35,1.13-.88,2.18-1.21,1.22-.38,2.27-.28,2.82-.19.76-.31,1.81-.7,3.09-1.03.84-.22,3.22-.83,3.35-.51.1.25-1.14,1.14-7.08,4.03-1.29.47-2.7,1.05-4.18,1.77-1.45.71-2.75,1.44-3.9,2.15,7.04-1.55,10.42-3.21,12.19-4.53.41-.3,1.81-1.39,3.94-2.28,1.57-.65,2.95-.96,3.89-1.11-2.34,1.53-4.68,3.06-7.01,4.6Z"/>
+            <path class="cls-4" d="M25.43,102.12c-2.13,3.04-5.04,7.13-8.58,11.92-6.84.5-13.06-2.06-14.18-9.07-.26-3.05-.04-6.18,1.24-9.04,1.68-3.75,4.04-6.95,6.77-10.06,7.05-8.05,62.44-82.45,103.61-48.21-33.28-13.03-65.45,16.63-72.7,35.83,0,0-7.05,15.63-16.16,28.63Z"/>
+          </g>
+          <g>
+            <path class="cls-7" d="M59.13,86.52l-15.54.02c-.25,0-.29.61-.11.71l15.1.02c-4.96,6.35-10.36,11.95-16.99,16.78l.05-19.18c0-.78,1.09-1.17,1.74-1.38l.04-36.42c0-1.03.98-1.61,1.84-1.63l2.88-.08h20.82s2.63.06,2.63.06c.74,0,1.49.52,1.49,1.36l.04,15.7c-2.83,5.44-5.56,10.74-8.7,16-1.65,2.77-3.28,5.23-5.29,8.06Z"/>
+            <path class="cls-8" d="M46.38,19.5c.48.46.58,1.27,1.36,1.57,1.31.73,2.87.83,4.41.57,9.02-1.56,15.57-10.08,16.85-19.15,1.07,3.91,1.34,7.6,1.6,11.6l.02,30.76h-24.28s.04-25.35.04-25.35Z"/>
+            <path class="cls-2" d="M52.28,21.11c-1.72.31-3.58.25-4.78-.76-1.03-.87-.74-2.48-.2-3.57,3.71-7.41,12.23-13.06,19.64-16.64.4-.19,1.03-.18,1.27.02.22.19.52.69.48,1.15-.52,4.97-2.47,9.72-5.8,13.49-2.81,3.18-6.32,5.53-10.61,6.31Z"/>
+          </g>
+        </g>
+        <path class="cls-6" d="M229.07,106.15c-1.54-.42-1.47,2.17-3.37,2.82-.56-.57-.78-1.4-.78-2.24l-.02-21.52c0-5.07-2.47-9.92-7.17-11.98-5.45-2.38-11.87-1.94-16.82,1.28-2.84,1.85-4.7,4.71-4.59,8.01.1,2.91,2.42,4.77,5.17,4.45,1.3-.15,2.42-.66,3.07-1.57.75-1.06.91-2.32.63-3.6-.75-3.42,1.54-6.73,5.11-6.77,1.42-.01,2.56,1.04,3.27,2.14,1.72,2.68,1.64,6.95,1.52,10.27-6.2,1.76-13.59,3.54-17.73,8.24-2.78,3.15-3.77,7.36-2.2,11.31,2.3,5.83,9.54,7.38,14.98,4.78,2.21-1.05,3.84-2.7,5.45-4.67.12,3.39,2.39,5.64,5.66,5.6,5.99-.07,10.1-5.93,7.84-6.55ZM211.89,107.29c-1.91,1.49-5.11,1.82-6.53-.32-2.86-4.28-1.15-9.82,2.86-12.75,2.14-1.57,4.36-2.53,6.89-3.6l.04,11.87c-.69,1.85-1.63,3.47-3.26,4.79Z"/>
+        <path class="cls-6" d="M295.5,90.29c.84-9.22-5.08-18.1-14.44-18.49-6.03-.25-11.64,2.89-14.98,8.01-4.86,7.45-4.95,17.08-.57,24.86,2.84,5.05,8.23,8.15,13.99,8.22,7.27.1,13.4-4.53,15.47-11.39.2-.65-.11-1.18-.65-1.36-1.53-.5-1.78,2.95-5.23,5.6-2.92,2.24-6.71,2.85-10.03,1.49-5.72-2.35-6.58-10.87-6.23-16.84l22.66-.1ZM280.23,74.96c1.9.43,3.24,1.85,4.07,3.57,1.32,2.91,1.98,5.97,1.86,9.43h-13.28c.09-5.09,2.02-12.59,7.35-13Z"/>
+        <path class="cls-5" d="M363.27,75.22c-5.09-4.83-13.32-4.89-17.64,1.08-.38-2.03.32-4.68-1.33-4.11l-10.51,3.64c-.66.23-1.01.36-.9,1.15.08.55.52.51,1.12.7,1.03.32,1.81,1.54,1.81,2.78v44.73c0,1.44-.87,2.71-2.09,2.97-.49.1-.84.26-.97.6-.09.25-.05.93.38.93l15.41-.04c.39,0,.37-1.33,0-1.34-1.7-.07-3.03-1.29-3.03-3.12l-.04-14.92c3.94,3.28,8.95,3.29,13.53,1.26,12.54-6.24,13.61-27.45,4.27-36.3ZM358.7,99.83c-.47,2.85-1.38,5.52-3.17,7.82-1.93,2.48-5.24,3.07-7.63,1.13-1.17-.95-2.17-2.57-2.18-4.18l-.05-23.65c.84-1.38,1.67-2.65,2.95-3.48,2.66-1.72,5.93-.96,7.6,1.68,3.32,5.25,3.5,14.47,2.47,20.68Z"/>
+        <g>
+          <path class="cls-5" d="M451.62,112.17c-.49,0-.5-.79-.38-1,.35-.62,3.06-.75,3.06-3.06v-47.05c.01-1.59-1.16-2.57-2.4-2.88-.47-.12-.41-.75-.32-1.01.11-.35.49-.49.92-.62l10.58-3.2c.45-.14,1.4-.16,1.4.58l.05,53.89c0,1.55,1.14,2.66,2.39,2.81.51.06.73.3.87.53.12.21.06.99-.3.99l-15.88.02Z"/>
+          <path class="cls-1" d="M452.23,106.12c-1.52-.38-1.62,2.3-2.99,2.71-.6.18-.99-.93-.99-1.53l-.11-22.59c-.02-3.8-1.7-7.32-4.47-9.76-7.27-6.4-21.62-2.59-23.47,5.29-.45,1.92-.23,4.11,1.25,5.52,1.57,1.49,4.12,1.55,5.84.43,1.38-.9,1.88-2.28,1.59-3.89-.37-2.07-.23-4.31,1.28-5.84,1.01-1.02,2.37-1.68,3.76-1.43,3.17.57,4.54,4.65,4.54,7.75v4.56c-5.82,1.57-12.83,3.4-17.08,7.6-3.45,3.41-4.57,8.8-2.01,13.17,2.36,4.03,7.05,5.46,11.4,4.49,3.37-.75,5.86-2.83,8.16-5.59.28,1.61.58,3.07,1.67,4.18,2.76,2.81,9.58,1.57,12.15-3.62.32-.66.09-1.3-.52-1.46ZM434.36,107.77c-2.15,1.22-4.76.64-5.88-1.54-2.22-4.34-.6-9.45,3.36-12.24l6.6-3.52.09,12.03c-.82,2.15-2.1,4.08-4.18,5.26Z"/>
+          <path class="cls-6" d="M503.27,115.94c-.21.11-.66.19-.84.53-1.49,2.74-4.1,4.31-6.77,4.84-6.22,1.23-10.99-3.42-13.46-9.29,2.35-1.03,4.04-2.62,5.62-4.7.47,1.85,1.03,3.92,2.89,4.74,4.23,1.85,9.27-.41,10.9-4.67.26-.68-.24-1.18-.76-1.26-1.38-.23-1.35,2.57-2.92,2.73-.62-.09-.72-1.28-.72-1.88l-.2-23.04c-.04-4.62-2.94-8.76-6.99-10.7-4.48-2.14-9.5-1.88-13.99-.03-4.1,1.69-7.8,5.83-6.91,10.2.49,2.44,2.64,3.78,5.05,3.56,2.48-.23,4.14-2.23,3.67-4.76-.29-1.56-.35-3.14.45-4.63.79-1.46,2.46-2.68,4.21-2.56,4.93.34,5.14,7.81,4.84,12.5-6.62,1.83-14.3,3.89-18.19,9.4-2.73,3.87-2.76,8.9.06,12.71,1.26,1.69,3.27,2.49,5.14,3.18,1.12,3.27,2.73,6.46,5.41,8.79,3.95,3.42,9.17,4.59,14.37,3.27,4.56-1.15,8.16-4.16,9.97-8.38.13-.31-.63-.65-.84-.54ZM477.49,106.3c-1.85-4.08-.58-8.83,2.95-11.57l6.94-3.92.05,11.88c-.8,2.22-2.08,4.2-4.24,5.32-2.2,1.14-4.69.54-5.7-1.7Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+        <nav class="nav-links" aria-label="Main navigation"><a class="active" href="#top">Home</a><a
+                href="#artists">Find Artist</a><a href="#services">Services</a><a href="#how-it-works">How It
+                Works</a><a href="#about">About Us</a><li class="price-filter"><button class="price-filter-toggle" type="button" aria-expanded="false" aria-label="Open filters" title="Open filters">⋮</button><form class="price-filter-menu" id="price-filter-form"><div class="filter-menu-heading"><strong>Filters</strong><button class="filter-close" type="button" aria-label="Close filters">×</button></div><fieldset><legend>Price range</legend><div class="range-values"><label>Min ₹<input id="min-price" type="number" min="1000" max="40000" value="1000" step="500"></label><span>to</span><label>Max ₹<input id="max-price" type="number" min="1000" max="40000" value="40000" step="500"></label></div><div class="range-slider"><input id="min-range" type="range" min="1000" max="40000" value="1000" step="500" aria-label="Minimum price"><input id="max-range" type="range" min="1000" max="40000" value="40000" step="500" aria-label="Maximum price"></div></fieldset><fieldset><legend>Makeup / Service</legend><select id="makeup-filter"><option value="all">All services</option><option value="bridal">Bridal Makeup</option><option value="engagement">Engagement Makeup</option><option value="party">Party Makeup</option><option value="photoshoot">Photoshoot Makeup</option><option value="basic">Basic Makeup</option><option value="hair">Hair Styling</option></select></fieldset><button class="apply-filters" type="submit">Apply filters</button><p id="price-filter-note" role="status"></p></form></li></nav>
+        <div class="top-actions"><span class="location-label">⌖ Patna, Bihar⌄</span><a class="login-button"
+                href="/login">Login / Sign Up</a></div>
+    </header>
+    <main id="top">
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="hero-logo"><svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 504.13 145.02">
+  <defs>
+    
+    <linearGradient id="linear-gradient" x1="17.14" y1="71.41" x2="128.87" y2="71.41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a51d4f"/>
+      <stop offset=".51" stop-color="#f8c2d2"/>
+      <stop offset="1" stop-color="#ef92b4"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="Generative_Object" data-name="Generative Object">
+      <g>
+        <path class="cls-6" d="M161.06,111.71c-1.08.97-3.72.81-5.59.49l-4.24-11.61-13.18-36.67-.05,38.52c0,1.93.29,3.67.78,5.4,1.01,3.56,4.48,2.52,4.84,3.35.13.31.08,1.02-.41,1.02h-12.56c-.49,0-.77-.2-.8-.59-.04-.46.24-.8.82-.79,4.38.08,5.12-5.2,5.12-9.56l-.02-40.67c0-1.52-.8-2.87-1.94-3.71-3.88-2.85-9-2.52-12.64.56-5.7,4.81-5.01,15.73-.14,16.95s7.73-2.19,7.87-.13c-3.27,1.92-7.15,2.88-10.94,2.04-3.35-.75-6.29-2.62-7.83-5.69-1.89-3.78-1.41-8.2.88-11.72,5.09-7.82,16.75-8.96,25.58-7.72,3.28.46,6.31,1.1,9.31,2.35,1.87.78,3.15,2.18,3.36,4.26l6.56,22.84,5.62,18.31,9.39-27.13,5.43-16.42c.43-1.31,2.21-1.95,3.43-1.95l11.18.02c.65,0,1.14.05,1.53.46.35.37.72,1.22.12,1.62l-1.87.29c-1.56.64-2.87,2.32-2.87,4.3l.05,45.92c0,5.44,2.77,10.58,6.58,14.19,8.62,8.16,22.93,7.62,31.96-.22.31-.27.62-.2.83.1.55.76-3.45,4.11-5.65,5.49-4.62,2.9-9.76,4.33-15.29,4.38-7.47.07-14.77-1.96-20.66-6.57-4.9-3.83-8.41-9.37-8.44-15.73l-.17-38.28-7.12,18.27-8.81,24.03Z"/>
+        <path class="cls-3" d="M267.22,112.21l-10.68-.02c-1.41,0-2.56-1.02-3.39-2.03l-1.52-1.84-9.6-14.76v14.11c0,1.45.98,2.74,2.29,2.98.55-.05.89.17,1.01.54.09.26.07,1.02-.41,1.02h-16.1c-.41,0-.5-.41-.53-.6-.03-.3.07-.76.51-.82,1.58-.21,2.66-1.39,2.66-3.12v-46.63c0-3.12-3.14-2.25-2.62-3.89.16-.5.58-.53,1.12-.69l10.49-3.04c.68-.2,1.5.2,1.51.99l.05,34.74,10.17-10.91c.53-.57.65-1.46.42-2.04-.3-.76-1.05-.98-1.94-1.09-.56-.07-.54-1.7.02-1.7l12.72-.07c.6,0,1.03.13,1.16.61.15.53-.08,1.09-.7,1.26-2.28.41-4.3,1.41-5.95,3.07l-8.77,8.82,10.87,17.56c1.11,1.79,2.25,3.38,3.84,4.72,2.24,1.9,4.43.61,3.36,2.83Z"/>
+        <path class="cls-6" d="M412.15,79.44c.36-1.17-.03-2.32-.56-3.1-1.09-1.62-3.36-.69-3.13-2.18.04-.24.13-.81.58-.81h12.26c.41,0,.52.39.58.59.52,1.57-3.1,1.16-4.54,4.41l-2.49,5.6-9.76,27.91c-1.12.72-2.48.6-3.76.18l-7.7-21.18-7.54,21.18c-1.26.44-2.46.44-3.75-.02l-13.05-33.78c-1.5-3.87-4.26-2.39-4-4.07.04-.25.13-.82.59-.82h16.78c.5,0,.55.74.51,1.02-.15,1.05-1.95.54-2.68,2.15-.37.83-.28,1.68.14,2.45l6.65,18.69,4.34-12.44-3.01-8.08c-1.13-2.42-3.17-1.45-3.27-2.77-.02-.31.13-1.02.7-1.02h16.06c.49,0,.55.57.57.81.1,1.45-1.76.57-2.74,2.1-.56.87-.45,1.75-.1,2.71l6.71,18.68,5.6-18.21Z"/>
+        <path class="cls-6" d="M298.26,80.21c-.01-2.64-2.49-2.54-2.69-3.1-.12-.34-.01-.86.4-1.16l10.86-3.63c.28-.15,1.36-.06,1.36.38l.03,28.57.42,3.41c.25,2.04,2.01,3.42,4.12,3.56,3.52.23,6.16-2.91,7.71-6.16l-.07-21.62c0-1.19-.73-2.49-1.7-2.84-.49-.17-.86-.2-1.06-.55-.15-.27-.21-1.05.26-1.2l11.05-3.63c.49-.16,1.31.03,1.31.65l.03,34.31c0,2.37,2.62,1.83,2.74,2.75.08.61-.2.82-.8.92l-9.78,1.77c-.47.09-.89.02-1.25-.21-.33-.21-.53-.65-.55-1.19l-.12-4.13c-3.01,4.27-7.73,6.48-12.87,5.66s-9.26-5.29-9.28-10.83l-.11-21.72Z"/>
+        <g>
+          <g>
+            <path class="cls-9" d="M84.35,131.45c1.68-.83,3.12-1.56,4.29-2.15,1.73-.88,2.22-1.15,2.87-1.63,1.37-1.03,1.57-1.63,2.63-2.53.79-.67,2.06-1.51,4.05-2.04-1.41,1.47-3.25,3.26-5.59,5.07-1.98,1.54-4.07,2.94-6.25,4.28-16.06,9.84-36.75,15.01-55.43,11.44-11.88-2.27-22.72-9.09-27.57-20.33-.74-1.72-1.5-3.25-1.81-5.11,7.64,12.7,25.28,13.34,38.23,9.57,15.48-4.51,28.32-15.07,35.97-29.23,4.17-7.71,6.81-16.07,7.64-24.79l.52-5.41c.09-.91.19-1.75.19-2.64l-.03-4.97-.32,3.1-.15,3.24c-.29,6.34-1.4,12.47-3.16,18.61-4.56,15.89-15.18,29.32-29.79,37.1-8.36,4.45-17.67,6.83-27.15,6.41-7.72-.34-15.46-3.04-20.19-9.16-1.88-2.43-2.94-5.15-3.2-8.23-.38-4.47.39-8.86,2.18-12.96,0,1.72-.31,3.16-.19,4.84.48,6.31,4.82,9.86,11.03,10.54,3.75.41,7.3-.17,10.97-1.19,17-4.73,30.97-18.62,40.05-33.41,3.34-5.44,6.11-10.9,9.1-16.52,2.49-4.69,5.05-9.07,8.49-13.09,8.39-9.77,19.8-15.23,32.56-12.6l-3.38.27c-10.39.82-18.86,8.2-21.39,18.44-.99,3.98-.61,7.9,1.24,11.55,1.09,2.15,1.85,4.35,1.94,6.82.03.9.18,1.74.5,2.56,1.67.34,3.28-.57,3.61-2.16,1.14,1.9-.64,3.38-2.96,4.14,1.7,2.4,3.99,4.1,6.49,5.58l2.97,1.76c.61.36,1.08.84,1.19,1.34.16.73.03,1.41-.46,1.93l-2.29,2.43c-.46.49-.57,1.18-.04,1.61l1.96,1.59c.61.49.9,1.35.3,1.88l-2.04,1.81c.83.34,1.61.33,2.17.86.5.48.27,1.32-.17,1.78-2.33,2.43.24,4.24.52,6.78.5,4.51-4.61,5.14-8.68,5.94-6.14,1.21-9.11,3.59-11.54,9.41-3.36.78-6.66,3.19-9.19,5.78.4-.35,1.13-.88,2.18-1.21,1.22-.38,2.27-.28,2.82-.19.76-.31,1.81-.7,3.09-1.03.84-.22,3.22-.83,3.35-.51.1.25-1.14,1.14-7.08,4.03-1.29.47-2.7,1.05-4.18,1.77-1.45.71-2.75,1.44-3.9,2.15,7.04-1.55,10.42-3.21,12.19-4.53.41-.3,1.81-1.39,3.94-2.28,1.57-.65,2.95-.96,3.89-1.11-2.34,1.53-4.68,3.06-7.01,4.6Z"/>
+            <path class="cls-4" d="M25.43,102.12c-2.13,3.04-5.04,7.13-8.58,11.92-6.84.5-13.06-2.06-14.18-9.07-.26-3.05-.04-6.18,1.24-9.04,1.68-3.75,4.04-6.95,6.77-10.06,7.05-8.05,62.44-82.45,103.61-48.21-33.28-13.03-65.45,16.63-72.7,35.83,0,0-7.05,15.63-16.16,28.63Z"/>
+          </g>
+          <g>
+            <path class="cls-7" d="M59.13,86.52l-15.54.02c-.25,0-.29.61-.11.71l15.1.02c-4.96,6.35-10.36,11.95-16.99,16.78l.05-19.18c0-.78,1.09-1.17,1.74-1.38l.04-36.42c0-1.03.98-1.61,1.84-1.63l2.88-.08h20.82s2.63.06,2.63.06c.74,0,1.49.52,1.49,1.36l.04,15.7c-2.83,5.44-5.56,10.74-8.7,16-1.65,2.77-3.28,5.23-5.29,8.06Z"/>
+            <path class="cls-8" d="M46.38,19.5c.48.46.58,1.27,1.36,1.57,1.31.73,2.87.83,4.41.57,9.02-1.56,15.57-10.08,16.85-19.15,1.07,3.91,1.34,7.6,1.6,11.6l.02,30.76h-24.28s.04-25.35.04-25.35Z"/>
+            <path class="cls-2" d="M52.28,21.11c-1.72.31-3.58.25-4.78-.76-1.03-.87-.74-2.48-.2-3.57,3.71-7.41,12.23-13.06,19.64-16.64.4-.19,1.03-.18,1.27.02.22.19.52.69.48,1.15-.52,4.97-2.47,9.72-5.8,13.49-2.81,3.18-6.32,5.53-10.61,6.31Z"/>
+          </g>
+        </g>
+        <path class="cls-6" d="M229.07,106.15c-1.54-.42-1.47,2.17-3.37,2.82-.56-.57-.78-1.4-.78-2.24l-.02-21.52c0-5.07-2.47-9.92-7.17-11.98-5.45-2.38-11.87-1.94-16.82,1.28-2.84,1.85-4.7,4.71-4.59,8.01.1,2.91,2.42,4.77,5.17,4.45,1.3-.15,2.42-.66,3.07-1.57.75-1.06.91-2.32.63-3.6-.75-3.42,1.54-6.73,5.11-6.77,1.42-.01,2.56,1.04,3.27,2.14,1.72,2.68,1.64,6.95,1.52,10.27-6.2,1.76-13.59,3.54-17.73,8.24-2.78,3.15-3.77,7.36-2.2,11.31,2.3,5.83,9.54,7.38,14.98,4.78,2.21-1.05,3.84-2.7,5.45-4.67.12,3.39,2.39,5.64,5.66,5.6,5.99-.07,10.1-5.93,7.84-6.55ZM211.89,107.29c-1.91,1.49-5.11,1.82-6.53-.32-2.86-4.28-1.15-9.82,2.86-12.75,2.14-1.57,4.36-2.53,6.89-3.6l.04,11.87c-.69,1.85-1.63,3.47-3.26,4.79Z"/>
+        <path class="cls-6" d="M295.5,90.29c.84-9.22-5.08-18.1-14.44-18.49-6.03-.25-11.64,2.89-14.98,8.01-4.86,7.45-4.95,17.08-.57,24.86,2.84,5.05,8.23,8.15,13.99,8.22,7.27.1,13.4-4.53,15.47-11.39.2-.65-.11-1.18-.65-1.36-1.53-.5-1.78,2.95-5.23,5.6-2.92,2.24-6.71,2.85-10.03,1.49-5.72-2.35-6.58-10.87-6.23-16.84l22.66-.1ZM280.23,74.96c1.9.43,3.24,1.85,4.07,3.57,1.32,2.91,1.98,5.97,1.86,9.43h-13.28c.09-5.09,2.02-12.59,7.35-13Z"/>
+        <path class="cls-5" d="M363.27,75.22c-5.09-4.83-13.32-4.89-17.64,1.08-.38-2.03.32-4.68-1.33-4.11l-10.51,3.64c-.66.23-1.01.36-.9,1.15.08.55.52.51,1.12.7,1.03.32,1.81,1.54,1.81,2.78v44.73c0,1.44-.87,2.71-2.09,2.97-.49.1-.84.26-.97.6-.09.25-.05.93.38.93l15.41-.04c.39,0,.37-1.33,0-1.34-1.7-.07-3.03-1.29-3.03-3.12l-.04-14.92c3.94,3.28,8.95,3.29,13.53,1.26,12.54-6.24,13.61-27.45,4.27-36.3ZM358.7,99.83c-.47,2.85-1.38,5.52-3.17,7.82-1.93,2.48-5.24,3.07-7.63,1.13-1.17-.95-2.17-2.57-2.18-4.18l-.05-23.65c.84-1.38,1.67-2.65,2.95-3.48,2.66-1.72,5.93-.96,7.6,1.68,3.32,5.25,3.5,14.47,2.47,20.68Z"/>
+        <g>
+          <path class="cls-5" d="M451.62,112.17c-.49,0-.5-.79-.38-1,.35-.62,3.06-.75,3.06-3.06v-47.05c.01-1.59-1.16-2.57-2.4-2.88-.47-.12-.41-.75-.32-1.01.11-.35.49-.49.92-.62l10.58-3.2c.45-.14,1.4-.16,1.4.58l.05,53.89c0,1.55,1.14,2.66,2.39,2.81.51.06.73.3.87.53.12.21.06.99-.3.99l-15.88.02Z"/>
+          <path class="cls-1" d="M452.23,106.12c-1.52-.38-1.62,2.3-2.99,2.71-.6.18-.99-.93-.99-1.53l-.11-22.59c-.02-3.8-1.7-7.32-4.47-9.76-7.27-6.4-21.62-2.59-23.47,5.29-.45,1.92-.23,4.11,1.25,5.52,1.57,1.49,4.12,1.55,5.84.43,1.38-.9,1.88-2.28,1.59-3.89-.37-2.07-.23-4.31,1.28-5.84,1.01-1.02,2.37-1.68,3.76-1.43,3.17.57,4.54,4.65,4.54,7.75v4.56c-5.82,1.57-12.83,3.4-17.08,7.6-3.45,3.41-4.57,8.8-2.01,13.17,2.36,4.03,7.05,5.46,11.4,4.49,3.37-.75,5.86-2.83,8.16-5.59.28,1.61.58,3.07,1.67,4.18,2.76,2.81,9.58,1.57,12.15-3.62.32-.66.09-1.3-.52-1.46ZM434.36,107.77c-2.15,1.22-4.76.64-5.88-1.54-2.22-4.34-.6-9.45,3.36-12.24l6.6-3.52.09,12.03c-.82,2.15-2.1,4.08-4.18,5.26Z"/>
+          <path class="cls-6" d="M503.27,115.94c-.21.11-.66.19-.84.53-1.49,2.74-4.1,4.31-6.77,4.84-6.22,1.23-10.99-3.42-13.46-9.29,2.35-1.03,4.04-2.62,5.62-4.7.47,1.85,1.03,3.92,2.89,4.74,4.23,1.85,9.27-.41,10.9-4.67.26-.68-.24-1.18-.76-1.26-1.38-.23-1.35,2.57-2.92,2.73-.62-.09-.72-1.28-.72-1.88l-.2-23.04c-.04-4.62-2.94-8.76-6.99-10.7-4.48-2.14-9.5-1.88-13.99-.03-4.1,1.69-7.8,5.83-6.91,10.2.49,2.44,2.64,3.78,5.05,3.56,2.48-.23,4.14-2.23,3.67-4.76-.29-1.56-.35-3.14.45-4.63.79-1.46,2.46-2.68,4.21-2.56,4.93.34,5.14,7.81,4.84,12.5-6.62,1.83-14.3,3.89-18.19,9.4-2.73,3.87-2.76,8.9.06,12.71,1.26,1.69,3.27,2.49,5.14,3.18,1.12,3.27,2.73,6.46,5.41,8.79,3.95,3.42,9.17,4.59,14.37,3.27,4.56-1.15,8.16-4.16,9.97-8.38.13-.31-.63-.65-.84-.54ZM477.49,106.3c-1.85-4.08-.58-8.83,2.95-11.57l6.94-3.92.05,11.88c-.8,2.22-2.08,4.2-4.24,5.32-2.2,1.14-4.69.54-5.7-1.7Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg></div>
+                <h1>Professional Makeup Artist,<br><em>Ab Aapke Ghar Par!</em> <span class="heart-mark">♡</span></h1>
+                <p>Book trusted &amp; verified makeup artists<br>for any occasion at your convenience.</p>
+                <form class="artist-search" id="artist-search"><span>⌖</span><input id="location-input" type="search"
+                        placeholder="Enter your location" aria-label="Enter your location"><button type="submit">Find
+                        Makeup Artist</button></form>
+                <p class="search-note" id="search-note" role="status"></p>
+            </div>
+            <div class="hero-slider" id="hero-slider" aria-label="Makeupwala services and products">
+                <div class="hero-slide active" role="img" aria-label="Makeup artist applying bridal makeup" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Bridal Season</span><h2>Your dream look starts here</h2><p>Book a verified bridal artist at home.</p><a class="hero-ad-link" href="#artists">Book your artist</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Makeup brushes and cosmetics" style="background-image: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Beauty Essentials</span><h2>Tools for a flawless finish</h2><p>Discover products selected by professionals.</p><a class="hero-ad-link" href="#services">Explore services</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Beauty skincare products" style="background-image: url('https://media.istockphoto.com/id/1336649728/photo/beautiful-traditional-indian-bride-getting-ready-for-her-wedding-day-by-makeup-artist.jpg?s=1024x1024&w=is&k=20&c=Fx7dcPBbOK8xlPo0gppsjOIR3c_GqS63Bq0YObs180g=')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Glow Care</span><h2>Make room for your glow</h2><p>Get ready with a personalized beauty routine.</p><a class="hero-ad-link" href="#artists">Find an expert</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Lipstick and beauty products" style="background-image: url('https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Party Ready</span><h2>Own every entrance</h2><p>Find a signature look for your next celebration.</p><a class="hero-ad-link" href="#artists">See artists</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Makeup artist preparing a beauty look" style="background-image: url('https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">At Your Doorstep</span><h2>Luxury beauty, made easy</h2><p>Professional makeup wherever you are.</p><a class="hero-ad-link" href="#booking">Book now</a></div>
+                </div>
+                <div class="slider-controls" aria-label="Slider controls">
+                    <button class="slider-dot active" type="button" aria-label="Show slide 1"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 2"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 3"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 4"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 5"></button>
+                </div>
+            </div>
+            <div class="hero-benefits"><span>♢ Verified Artists</span><span>◷ On-Time Service</span><span>♧ Premium
+                    Products</span><span>♢ Safe &amp; Hygienic</span></div>
+        </section>
+        <section class="services-section" id="services">
+            <div class="section-title">
+                <h2>Our <em>Services</em></h2><span>♥</span>
+                <p>Make every moment beautiful</p>
+            </div>
+            <div class="service-grid"><a class="service-tile" href="#artists"><strong>♧</strong>
+                    <h3>Bridal Makeup</h3>
+                    <p>Look your best on your special day</p>
+                </a><a class="service-tile" href="#artists"><strong>◯</strong>
+                    <h3>Engagement Makeup</h3>
+                    <p>Shine on your engagement day</p>
+                </a><a class="service-tile" href="#artists"><strong>♕</strong>
+                    <h3>Party Makeup</h3>
+                    <p>Perfect look for parties &amp; get-togethers</p>
+                </a><a class="service-tile" href="#artists"><strong>▣</strong>
+                    <h3>Photoshoot Makeup</h3>
+                    <p>Flawless look for your special moments</p>
+                </a><a class="service-tile" href="#artists"><strong>◖</strong>
+                    <h3>Basic Makeup</h3>
+                    <p>Elegant everyday makeup</p>
+                </a><a class="service-tile" href="#artists"><strong>♙</strong>
+                    <h3>Hair Styling</h3>
+                    <p>Beautiful hairstyles for every look</p>
+                </a></div>
+        </section>
+        <section class="how-section" id="how-it-works">
+            <div class="section-title">
+                <h2>How <em>It Works</em></h2><span>♥</span>
+            </div>
+            <div class="steps">
+                <div class="step"><b>⌕</b><strong>1. Search</strong>
+                    <p>Search for makeup artists<br>near your location</p>
+                </div><i>⟶</i>
+                <div class="step"><b>♙</b><strong>2. Choose Artist</strong>
+                    <p>View profiles, reviews &amp;<br>choose your artist</p>
+                </div><i>⟶</i>
+                <div class="step"><b>▣</b><strong>3. Book</strong>
+                    <p>Select date, time &amp; book<br>your appointment</p>
+                </div><i>⟶</i>
+                <div class="step"><b>⌂</b><strong>4. Makeup at Home</strong>
+                    <p>Artist will come to your home<br>&amp; make you look beautiful</p>
+                </div>
+            </div>
+        </section>
+        <section class="artists-section" id="artists">
+            <div class="section-title inline-title">
+                <div>
+                    <h2>Featured <em>Artists</em></h2><span>♥</span>
+                </div><a href="#services">View All Artists&nbsp; ›</a>
+            </div>
+            <div class="artist-grid">
+                <article class="artist-card" data-price="1999" data-service="bridal"><img
+                        src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=600&q=85"
+                        alt="Riya Sharma makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Riya Sharma to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Riya Sharma</h3>
+                        <p>⭐ 4.8 (120) &nbsp; · &nbsp; 5 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.1,999</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="2499" data-service="engagement"><img
+                        src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=600&q=85"
+                        alt="Neha Singh makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Neha Singh to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Neha Singh</h3>
+                        <p>⭐ 4.9 (98) &nbsp; · &nbsp; 6 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.2,499</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="1799" data-service="party"><img
+                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=85"
+                        alt="Anjali Verma makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Anjali Verma to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Anjali Verma</h3>
+                        <p>⭐ 4.7 (76) &nbsp; · &nbsp; 4 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.1,799</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="2299" data-service="photoshoot"><img
+                        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=85"
+                        alt="Muskan Ansari makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Muskan Ansari to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Muskan Ansari</h3>
+                        <p>⭐ 4.8 (110) &nbsp; · &nbsp; 7 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.2,299</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="why-section" id="about">
+            <div class="section-title">
+                <h2>Why Choose <em>Makeupwala?</em></h2><span>♥</span>
+            </div>
+            <div class="why-grid">
+                <div><b>♢</b>
+                    <h3>Verified Artists</h3>
+                    <p>All artists are verified<br>&amp; background checked</p>
+                </div>
+                <div><b>⌂</b>
+                    <h3>Home Service</h3>
+                    <p>Enjoy luxury makeup<br>service at your home</p>
+                </div>
+                <div><b>☆</b>
+                    <h3>Top Rated</h3>
+                    <p>Highly rated by thousands<br>of happy customers</p>
+                </div>
+                <div><b>₹</b>
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden charges<br>what you see is what you pay</p>
+                </div>
+                <div><b>♧</b>
+                    <h3>Secure Booking</h3>
+                    <p>Your booking &amp; payment<br>are 100% secure</p>
+                </div>
+            </div>
+        </section>
+        <section class="reviews-section">
+            <div class="section-title">
+                <h2>What Our <em>Clients Say</em></h2><span>♥</span>
+            </div>
+            <div class="review-grid">
+                <blockquote>“<p>Amazing experience! The makeup artist was so professional and punctual. Loved the look.
+                        Highly recommended!</p>
+                    <footer><span>◉</span><b>— Pooja Verma<br><small>Patna</small></b></footer>
+                </blockquote>
+                <blockquote>“<p>Booked for my engagement and the makeup was absolutely perfect. Thank you Makeupwala!
+                    </p>
+                    <footer><span>◉</span><b>— Sneha Rani<br><small>Patna</small></b></footer>
+                </blockquote>
+                <blockquote>“<p>Very easy booking process and the artist came on time. Great service!</p>
+                    <footer><span>◉</span><b>— Aarti Kumari<br><small>Patna</small></b></footer>
+                </blockquote>
+            </div>
+        </section>
+        <section class="booking-anchor" id="booking">
+            <h2>Ready to look <em>beautiful?</em></h2>
+            <p>Find your trusted makeup artist today.</p><a class="pink-button"
+                href="mailto:support@makeupwala.com?subject=Makeup%20artist%20booking">Book an Artist&nbsp; ↗</a>
+        </section>
+    </main>
+    <footer class="site-footer" id="contact">
+        <div class="footer-brand"><a class="logo" href="#top"><span
+                    class="logo-mark">M</span><span>Makeup<span>wala</span></span></a>
+            <p>Professional makeup artists at your doorstep.<br>Book easily, look beautiful<br>&amp; shine on every
+                occasion.</p>
+            <div class="socials">◎ &nbsp; f &nbsp; ◉ &nbsp; ▶</div>
+        </div>
+        <div>
+            <h3>Quick Links</h3><a href="#top">Home</a><a href="#artists">Find Artist</a><a
+                href="#services">Services</a><a href="#how-it-works">How It Works</a><a href="#about">About Us</a><a
+                href="#contact">Contact</a>
+        </div>
+        <div>
+            <h3>Support</h3><a href="#contact">Help Center</a><a href="#contact">FAQs</a><a href="#contact">Terms &amp;
+                Conditions</a><a href="#contact">Privacy Policy</a><a href="#contact">Cancellation Policy</a><a
+                href="#contact">Refund Policy</a>
+        </div>
+        <div>
+            <h3>Contact Us</h3><a href="tel:+919123456789">⌕ &nbsp; +91 91234 56789</a><a
+                href="mailto:support@makeupwala.com">▱ &nbsp; support@makeupwala.com</a><span>⌖ &nbsp; Patna, Bihar,
+                India</span>
+        </div>
+        <div class="copyright"><span>© 2024 Makeupwala. All Rights Reserved.</span><span>Made with <b>♥</b> for your
+                beauty</span></div>
+    </footer>
+    <script>
+        (() => {
+            const slider = document.getElementById('hero-slider');
+            const slides = slider.querySelectorAll('.hero-slide');
+            const dots = slider.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                currentSlide = index;
+                slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === currentSlide));
+                dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === currentSlide));
+            }
+
+            dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
+            setInterval(() => showSlide((currentSlide + 1) % slides.length), 4500);
+        })();
+
+        const priceFilter = document.getElementById('price-filter-form');
+        const priceToggle = document.querySelector('.price-filter-toggle');
+
+        if (priceFilter && priceToggle) {
+            const priceMenu = priceFilter.closest('.price-filter-menu');
+            const minPriceInput = document.getElementById('min-price');
+            const maxPriceInput = document.getElementById('max-price');
+            const minRange = document.getElementById('min-range');
+            const maxRange = document.getElementById('max-range');
+            const closeFilter = document.querySelector('.filter-close');
+
+            priceToggle.addEventListener('click', () => {
+                const isOpen = priceMenu.classList.toggle('open');
+                priceToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            closeFilter?.addEventListener('click', () => {
+                priceMenu.classList.remove('open');
+                priceToggle.setAttribute('aria-expanded', 'false');
+            });
+
+            minRange?.addEventListener('input', () => {
+                minPriceInput.value = Math.min(Number(minRange.value), Number(maxRange.value) - 500);
+            });
+            maxRange?.addEventListener('input', () => {
+                maxPriceInput.value = Math.max(Number(maxRange.value), Number(minRange.value) + 500);
+            });
+            minPriceInput?.addEventListener('input', () => {
+                minRange.value = Math.min(Number(minPriceInput.value) || 1000, Number(maxRange.value) - 500);
+            });
+            maxPriceInput?.addEventListener('input', () => {
+                maxRange.value = Math.max(Number(maxPriceInput.value) || 40000, Number(minRange.value) + 500);
+            });
+
+            priceFilter.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const minPrice = Number(document.getElementById('min-price').value) || 1000;
+                const maxPrice = Number(document.getElementById('max-price').value) || 40000;
+                    const makeupFilter = document.getElementById('makeup-filter').value;
+                const note = document.getElementById('price-filter-note');
+
+                if (minPrice < 1000 || maxPrice > 40000 || minPrice > maxPrice) {
+                    note.textContent = 'Choose a valid range from ₹1,000 to ₹40,000.';
+                    return;
+                }
+
+                let visibleArtists = 0;
+                document.querySelectorAll('.artist-card').forEach((card) => {
+                    const matches = Number(card.dataset.price) >= minPrice
+                        && Number(card.dataset.price) <= maxPrice
+                        && (makeupFilter === 'all' || card.dataset.service === makeupFilter);
+                    card.hidden = !matches;
+                    if (matches) visibleArtists += 1;
+                });
+                note.textContent = `${visibleArtists} artist${visibleArtists === 1 ? '' : 's'} found.`;
+                document.getElementById('artists').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+
+</html>

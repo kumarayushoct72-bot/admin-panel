@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup Wala - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #fff4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 1200px;
+            max-width: 100%;
+            min-height: 680px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 60px rgba(196, 65, 104, 0.15);
+        }
+
+        /* ================= SLIDER ================= */
+
+        .slider-section {
+            width: 55%;
+            position: relative;
+            overflow: hidden;
+            background: #c66b7b;
+        }
+
+        .slides {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(65, 20, 30, 0.55),
+                    rgba(65, 20, 30, 0.05));
+        }
+
+        .slide1 {
+            background-image: url("https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85");
+        }
+
+        .slide2 {
+            background-image: url("https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=85");
+        }
+
+        .slide3 {
+            background-image: url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85");
+        }
+
+        .slide-content {
+            position: absolute;
+            z-index: 2;
+            color: white;
+            left: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 430px;
+        }
+
+        .slide-content h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .slide-content h1 span {
+            color: #ff9fbd;
+        }
+
+        .slide-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .explore-btn {
+            border: none;
+            background: #ed4d7b;
+            color: white;
+            padding: 15px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .explore-btn:hover {
+            background: #d93665;
+            transform: translateY(-2px);
+        }
+
+        /* Slider arrows */
+
+        .slider-arrow {
+            position: absolute;
+            z-index: 5;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.35);
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Dots */
+
+        .dots {
+            position: absolute;
+            z-index: 5;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 10px;
+            background: #ff4f80;
+            opacity: 1;
+        }
+
+        /* ================= LOGIN ================= */
+
+        .login-section {
+            width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .logo h2 {
+            color: #e74674;
+            font-size: 43px;
+            font-family: cursive;
+            font-style: italic;
+        }
+
+        .logo span {
+            display: block;
+            color: #252525;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 7px;
+            margin-top: -5px;
+        }
+
+        .login-title {
+            text-align: center;
+            margin-top: 35px;
+            position: relative;
+            top: 40px;
+        }
+
+        .login-title h3 {
+            font-size: 26px;
+            color: #282832;
+            margin-bottom: 8px;
+        }
+
+        .login-title p {
+            color: #888;
+            font-size: 15px;
+        }
+
+        .form {
+            margin-top: 35px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-box {
+            height: 58px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .logo {
+            width: 280px;
+            height: 80px;
+            position: relative;
+            top: 30px;
+            left: 20px;
+        }
+
+        .input-box:focus-within {
+            border-color: #e74674;
+            box-shadow: 0 0 0 3px rgba(231, 70, 116, 0.08);
+        }
+
+        .country-code {
+            font-weight: bold;
+            padding-right: 14px;
+            border-right: 1px solid #ddd;
+            margin-right: 12px;
+            font-size: 20px;
+            position: relative;
+            left: 30px;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+
+        }
+
+        .number-input {
+            font-size: 25px;
+            padding: 0 0 0 30px;
+            letter-spacing: 5px;
+        }
+
+        .number-input::placeholder {
+            font-size: 18px;
+        }
+
+        .otp-box {
+            display: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .main-btn {
+            width: 100%;
+            height: 56px;
+            border: none;
+            border-radius: 12px;
+            background: #e74674;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            background: #d93665;
+            transform: translateY(-1px);
+        }
+
+        .artist-btn {
+            width: 100%;
+            height: 56px;
+            border: none;
+            border-radius: 12px;
+            background: #f4b7c7;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            position: relative;
+            top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .otp-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .otp-symbol {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .resend {
+            border: none;
+            background: none;
+            color: #e74674;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .before-location {
+            display: none;
+        }
+
+        .resend:disabled {
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .login-btn {
+            margin-top: 20px;
+            background: #f4b7c7;
+        }
+
+        .login-btn:not(:disabled) {
+            background: #e74674;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #999;
+            margin: 25px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            background: #e5e5e5;
+            flex: 1;
+        }
+
+        .security {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: 30px;
+        }
+
+        .message {
+            min-height: 20px;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #25a56a;
+        }
+
+        .error {
+            color: #e74674;
+        }
+
+        .location-btn {
+            margin-top: 10px;
+            background: #ffc1d5;
+        }
+
+        .location-btn:not(:disabled) {
+            background: #ff9fbd;
+        }
+
+        .location-btn:disabled {
+            background: #f4b7c7;
+            cursor: not-allowed;
+        }
+
+        /* ================= login as a artist ================= */
+        .before-input-group {
+            display: none;
+            transition: all 0.3s ease-in-out linear;
+        }
+
+        #idimagelabel,
+        #idimage {
+            display: none;
+        }
+        #idimage{
+         width: 100%;
+         height: 100%;
+         visibility: hidden;
+         position: absolute;
+         z-index: 4;
+        }
+        .id-image-label {
+            display: none;
+        position: relative;
+            top: -10px;
+            left: 0px;
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        #idProof {
+
+            width: 100%;
+            height: 40px;
+            border: 2px solid rgb(201, 152, 152);
+            border-radius: 8px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-left: 54px;
+            padding-left: 13px;
+            position: relative;
+            top: -20px;
+            left: -55px;
+            color: rgb(85, 84, 84);
+        }
+        #artist-login {
+            display: none;
+        }
+        .select-label {
+            position: relative;
+            top: -35px;
+        }
+
+        .flag-img {
+            width: 30px;
+            position: relative;
+            top: 73px;
+            left: 10px;
+            height: 30px;
+        }
+        .upload-image {
+            display: none;
+            width: 100%;
+            height: 90px;
+            border: 1px dashed #7b3232;
+            border-radius: 12px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            background: white;
+            cursor: pointer;
+        }
+        .upload-symbol {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            left: 50%;
+            display: flex;
+            justify-content: center;
+            top: 10px;
+        }
+        .upload-image label {
+            position: relative;
+           
+            display: flex;
+            justify-content: center;
+            top: 20px;
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+        b{
+            position: relative;
+            
+            font-size: 12px;
+            top: 20px; 
+            left: 30%;
+            display: flex;
+           
+            width: 290px;
+        }
+        .location{
+            width: 100%;
+        }
+        .before-location input {
+            width: 100%;
+            height: 40px;
+            border: 2px solid rgb(201, 152, 152);
+            border-radius: 8px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-left: 54px;
+            padding-left: 13px;
+            position: relative;
+            top: 0px;
+            left: -55px;
+            color: rgb(85, 84, 84);
+        }
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+            .login-container {
+                min-height: auto;
+            }
+
+            .slider-section {
+                display: none;
+            }
+
+            .login-section {
+                width: 100%;
+                padding: 50px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+
+            .login-container {
+                min-height: 100vh;
+                border-radius: 0;
+            }
+
+            .login-section {
+                padding: 35px 22px;
+            }
+
+            .logo h2 {
+                font-size: 38px;
+            }
+
+            .login-title h3 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- ================= SLIDER ================= -->
+
+        <section class="slider-section">
+
+            <div class="slides" id="slides">
+
+                <div class="slide slide1">
+                    <div class="slide-content">
+                        <h1>
+                            Enhance Your Beauty<br>
+                            <span>Enhance Your Confidence</span>
+                                            "Please allow location access to continue.";
+                                        message.className = "message error";
+                                        return;
+
+                        <button class="explore-btn">
+                            Explore Now →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="slide slide2">
+                    <div class="slide-content">
+                        <h1>
+                            Discover Your<br>
+                            <span>Perfect Look</span>
+                        </h1>
+
+                        <p>
+                            Find the latest beauty trends, makeup products
+                            and everything you need to glow.
+                        </p>
+
+                        <button class="explore-btn">
+                            Shop Beauty →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="slide slide3">
+                    <div class="slide-content">
+                        <h1>
+                            Beauty Starts<br>
+                            <span>With You</span>
+                        </h1>
+
+                        <p>
+                            Explore premium cosmetics selected specially
+                            for your beauty journey.
+                        </p>
+
+                        <button class="explore-btn">
+                            Explore Now →
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="button" class="slider-arrow prev" onclick="previousSlide()">
+                ‹
+            </button>
+
+            <button type="button" class="slider-arrow next" onclick="nextSlide()">
+                ›
+            </button>
+
+            <div class="dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+            </div>
+
+        </section>
+
+
+        <!-- ================= LOGIN ================= -->
+
+        <section class="login-section">
+
+            <div class="login-box">
+
+                <div class="logo">
+                    <img src="logo-logo.webp" class="logo" alt="">
+                </div>
+
+                <div class="login-title">
+                    <h3>Welcome to Makeup Wala</h3>
+                    <p id="artist">Create an account in few easy steps</p>
+                </div>
+
+                <div class="form">
+
+                    <!-- Mobile Number -->
+                    <img src="flag.png" alt="" class="flag-img">
+                    <label class="input-label">
+                        Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="country-code">
+                            +91
+                        </span>
+
+                        <input type="tel" id="mobile" maxlength="11" placeholder="mobile number" class="number-input">
+
+                    </div>
+
+                        <button type="button" class="main-btn" id="sendOtpBtn" onclick="sendOTP()"> <svg class="otp-symbol"
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#1f1f1f">
+                            <path
+                                d="M348.5-531.5Q360-543 360-560t-11.5-28.5Q337-600 320-600t-28.5 11.5Q280-577 280-560t11.5 28.5Q303-520 320-520t28.5-11.5Zm160 0Q520-543 520-560t-11.5-28.5Q497-600 480-600t-28.5 11.5Q440-577 440-560t11.5 28.5Q463-520 480-520t28.5-11.5Zm160 0Q680-543 680-560t-11.5-28.5Q657-600 640-600t-28.5 11.5Q600-577 600-560t11.5 28.5Q623-520 640-520t28.5-11.5ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z" />
+                        </svg>
+                        Send OTP
+                    </button>
+
+
+                    <!-- Divider -->
+
+                    <div class="divider">
+                        OR
+                    </div>
+
+                    <button type="button" class="main-btn google-btn" id="googleLoginBtn">
+                        Continue with Google
+                    </button>
+
+                    <!-- OTP -->
+
+                    <div class="otp-box" id="otpSection">
+
+                        <label class="input-label">
+                            Enter OTP
+                        </label>
+
+                        <div class="input-box">
+
+                            <input type="text" id="otp" maxlength="6" placeholder="Enter 6 digit OTP">
+
+                        </div>
+
+                        <div class="otp-row">
+
+                            <span style="font-size:14px;color:#888">
+                                OTP sent to your number
+                            </span>
+
+                            <button type="button" class="resend" id="resendBtn" onclick="resendOTP()" disabled>
+                                Resend OTP (30)
+                            </button>
+
+                        </div>
+                        <button type="button" class="main-btn location-btn" id="locationBtn" onclick="requestLocation()"
+                            style="display:none;">
+                            Allow Location & Continue
+                        </button>
+
+                        <button type="button" class="main-btn login-btn" id="loginBtn" onclick="login()" disabled>
+                            Login
+                        </button>
+
+
+                    </div>
+
+                    <div class="message" id="message"></div>
+
+                </div>
+                
+                    <div class="before-input-group">
+                        <label for="ID Proof" class="select-label">Select ID Proof</label>
+                        <select id="idProof" name="idProof" required>
+                            <option value="">Select ID Proof</option>
+                            <option value="aadhar">pan card</option>
+                            <option value="pan">Voter ID</option>
+                        </select>
+                    </div>
+                    <div class="before-idimage">
+                        <label for="idNumber"  id="idimageLabel" class="id-image-label">Upload id image</label>
+                        
+                        <div class="upload-image"><input type="file" id="idimage" name="idnumber" accept=".jpg, .jpeg, .png, .pdf"> <svg xmlns="http://www.w3.org/2000/svg" class="upload-symbol" height="24px"
+                            viewBox="0 -960 960 960" width="24px" fill="#EA3323">
+                            <path
+                            d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z" />
+                        </svg><label for="">Click to upload or drag and drop</label> <b>JPG, PNG, PDF (Max 5MB)</b></div>
+                    </div>
+                    <div class="before-location">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Allow location access to continue" readonly
+                            required>
+                    </div>
+                
+
+                <button type="button" class="main-btn artist-btn" onclick="changecontent()">Login as Artist</button>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        const googleClientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+
+        function initGoogleLogin() {
+            if (!googleClientId || googleClientId.includes('YOUR_GOOGLE_CLIENT_ID')) {
+                document.getElementById('googleLoginBtn').style.display = 'none';
+                return;
+            }
+
+            google.accounts.id.initialize({
+                client_id: googleClientId,
+                callback: handleGoogleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(document.getElementById('googleLoginBtn'), {
+                theme: 'outline',
+                size: 'large',
+                width: '100%',
+                text: 'continue_with',
+                shape: 'pill'
+            });
+        }
+
+        async function handleGoogleCredentialResponse(response) {
+            const message = document.getElementById('message');
+            message.innerText = 'Signing in with Google...';
+            message.className = 'message success';
+
+            try {
+                const res = await fetch(`${apiBaseUrl}/api/auth/google`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ credential: response.credential })
+                });
+
+                const data = await readJsonResponse(res);
+                message.innerText = data.message;
+                message.className = 'message success';
+                window.location.href = data.redirect;
+            } catch (error) {
+                message.innerText = error.message;
+                message.className = 'message error';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            if (window.google && window.google.accounts) {
+                initGoogleLogin();
+            }
+        });
+
+        /* ================= SLIDER ================= */
+
+        let currentSlide = 0;
+
+        const slides = document.getElementById("slides");
+        const dots = document.querySelectorAll(".dot");
+
+        function updateSlider() {
+
+            slides.style.transform =
+                `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
+
+            });
+        }
+
+        function nextSlide() {
+
+            currentSlide++;
+
+            if (currentSlide >= 3) {
+                currentSlide = 0;
+            }
+
+            updateSlider();
+        }
+
+        function previousSlide() {
+
+            currentSlide--;
+
+            if (currentSlide < 0) {
+                currentSlide = 2;
+            }
+
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+
+            currentSlide = index;
+            updateSlider();
+
+        }
+
+        // Automatic slider
+
+        setInterval(nextSlide, 5000);
+
+        const mobileInput = document.getElementById("mobile");
+
+        mobileInput.addEventListener("input", function () {
+
+            // Sirf numbers allow karo
+            let value = this.value.replace(/\D/g, "");
+
+            // Maximum 10 digits
+            value = value.substring(0, 10);
+
+            // 5 digits ke baad space
+            if (value.length > 5) {
+                value = value.substring(0, 5) + " " + value.substring(5);
+            }
+
+            this.value = value;
+        });
+        /* ================= OTP ================= */
+
+        let timer;
+        let countdown = 30;
+        const apiBaseUrl = window.location.port === "3000"
+            ? ""
+            : "http://localhost:3000";
+
+        async function readJsonResponse(response) {
+            const text = await response.text();
+            let data;
+
+            try {
+                data = text ? JSON.parse(text) : {};
+            } catch (error) {
+                throw new Error(`Server returned an invalid response (${response.status}).`);
+            }
+
+            if (!response.ok) {
+                throw new Error(data.message || `Request failed (${response.status}).`);
+            }
+
+            return data;
+        }
+
+        function sendOTP() {
+
+            const mobile =
+                document.getElementById("mobile").value.replace(/\D/g, '');
+
+            const message =
+                document.getElementById("message");
+
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+
+                message.innerText =
+                    "Please enter a valid 10-digit mobile number.";
+
+                message.className =
+                    "message error";
+
+                return;
+            }
+
+            message.innerText = "Sending OTP...";
+            message.className = "message success";
+
+            fetch(`${apiBaseUrl}/api/auth/request-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mobile })
+            })
+                .then(readJsonResponse)
+                .then(data => {
+                    message.innerText = data.message;
+                    document.getElementById("otpSection").style.display = "block";
+                    document.getElementById("sendOtpBtn").innerText = "OTP Sent";
+                    if (data.otp) {
+                        document.getElementById("otp").value = data.otp;
+                        document.getElementById("otp").dispatchEvent(new Event("input"));
+                        message.innerText = `${data.message} Code: ${data.otp}`;
+                    }
+                    startTimer();
+                })
+                .catch(error => {
+                    message.innerText = error.message;
+                    message.className = "message error";
+                });
+
+        }
+        let isArtist = false;
+        //login as a artist button and user button
+        function changecontent() {
+            if (!isArtist) {
+                document.getElementById("artist").innerHTML = "Login as Artist";
+                document.querySelector(".before-input-group").style.display = "block";
+                document.querySelector(".before-location").style.display = "block";
+                document.querySelector(".upload-image").style.display = "block";
+                document.querySelector(".artist-btn").innerHTML = "Login as User";
+                document.getElementById("idProof").required = true;
+                document.getElementById("idimage").style.display = "block";
+                document.getElementById("idimageLabel").style.display = "block";
+                isArtist = true;
+            } else {
+                document.getElementById("artist").innerHTML = "Create an account in few easy steps";
+                document.querySelector(".before-input-group").style.display = "none";
+                document.querySelector(".before-location").style.display = "none";
+                document.querySelector(".upload-image").style.display = "none";
+                document.getElementById("idProof").required = false;
+                document.getElementById("idimage").style.display = "none";
+                document.querySelector(".artist-btn").innerHTML = "Login as Artist";
+                document.getElementById("idimageLabel").style.display = "none";
+                isArtist = false;
+            }
+        }
+
+        function startTimer() {
+
+            countdown = 30;
+
+            const resendBtn =
+                document.getElementById("resendBtn");
+
+            resendBtn.disabled = true;
+
+            resendBtn.innerText =
+                `Resend OTP (${countdown})`;
+
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+
+                countdown--;
+
+                resendBtn.innerText =
+                    `Resend OTP (${countdown})`;
+
+                if (countdown <= 0) {
+
+                    clearInterval(timer);
+
+                    resendBtn.disabled = false;
+
+                    resendBtn.innerText =
+                        "Resend OTP";
+
+                }
+
+            }, 1000);
+
+        }
+        //location
+
+
+        function resendOTP() {
+            sendOTP();
+
+        }
+
+
+        /* ================= OTP VALIDATION ================= */
+
+        let userLocation = null;
+
+        document.getElementById("otp")
+            .addEventListener("input", function () {
+
+                const loginBtn =
+                    document.getElementById("loginBtn");
+
+                const locationBtn =
+                    document.getElementById("locationBtn");
+
+                if (this.value.length === 6) {
+                    locationBtn.style.display = "block";
+                    loginBtn.disabled = false;
+                } else {
+                    locationBtn.style.display = "none";
+                    loginBtn.disabled = true;
+                }
+
+            });
+
+        function requestLocation() {
+            const message = document.getElementById("message");
+            const locationInput = document.getElementById("location");
+            const locationButton = document.getElementById("locationBtn");
+
+            if (!window.isSecureContext) {
+                message.innerText = "Location access requires HTTPS or localhost.";
+                message.className = "message error";
+                return;
+            }
+
+            if (navigator.geolocation) {
+                locationButton.disabled = true;
+                locationButton.innerText = "Requesting Location...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+
+                        userLocation = {
+                            latitude: latitude,
+                            longitude: longitude,
+                            accuracy: position.coords.accuracy,
+                            timestamp: new Date().toISOString()
+                        };
+
+                        // Fill location input field
+                        locationInput.value = `Lat: ${latitude.toFixed(6)}, Long: ${longitude.toFixed(6)}`;
+
+                        message.innerText = "✓ Location captured successfully!";
+                        message.className = "message success";
+                        locationButton.innerText = "Location Enabled ✓";
+                        console.log("User Location:", userLocation);
+                    },
+                    (error) => {
+                        locationButton.disabled = false;
+                        locationButton.innerText = "Allow Location & Continue";
+                        message.innerText = error.code === error.PERMISSION_DENIED
+                            ? "Location access was denied. Allow it in your browser settings to continue."
+                            : "Unable to get your location. Please try again.";
+                        message.className = "message error";
+                        console.error("Location error:", error);
+                    }
+                );
+            } else {
+                message.innerText = "Geolocation is not supported by your browser.";
+                message.className = "message error";
+            }
+        }
+
+        function login() {
+
+            const otp =
+                document.getElementById("otp").value;
+
+            const message =
+                document.getElementById("message");
+
+            if (otp.length !== 6) {
+
+                message.innerText =
+                    "Please enter a valid 6-digit OTP.";
+
+                message.className =
+                    "message error";
+
+                return;
+            }
+
+            fetch(`${apiBaseUrl}/api/auth/verify-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    otp,
+                    mobile: document.getElementById("mobile").value.replace(/\D/g, ''),
+                    location: userLocation
+                })
+            })
+                .then(readJsonResponse)
+                .then(data => {
+                    message.innerText = data.message;
+                    message.className = "message success";
+                    window.location.href = data.redirect;
+                })
+                .catch(error => {
+                    message.innerText = error.message;
+                    message.className = "message error";
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Makeupwala connects you with trusted makeup artists for every occasion.">
+    <title>Makeupwala | Professional Makeup Artists at Your Doorstep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="logo" href="#top" aria-label="Makeupwala home"><span
+                class="logo-mark">M</span><span>Makeup<span>wala</span></span></a>
+        <nav class="nav-links" aria-label="Main navigation"><a class="active" href="#top">Home</a><a
+                href="#artists">Find Artist</a><a href="#services">Services</a><a href="#how-it-works">How It
+                Works</a><a href="#about">About Us</a><li class="price-filter"><button class="price-filter-toggle" type="button" aria-expanded="false" aria-label="Open filters" title="Open filters">⋮</button><form class="price-filter-menu" id="price-filter-form"><div class="filter-menu-heading"><strong>Filters</strong><button class="filter-close" type="button" aria-label="Close filters">×</button></div><fieldset><legend>Price range</legend><div class="range-values"><label>Min ₹<input id="min-price" type="number" min="1000" max="40000" value="1000" step="500"></label><span>to</span><label>Max ₹<input id="max-price" type="number" min="1000" max="40000" value="40000" step="500"></label></div><div class="range-slider"><input id="min-range" type="range" min="1000" max="40000" value="1000" step="500" aria-label="Minimum price"><input id="max-range" type="range" min="1000" max="40000" value="40000" step="500" aria-label="Maximum price"></div></fieldset><fieldset><legend>Makeup / Service</legend><select id="makeup-filter"><option value="all">All services</option><option value="bridal">Bridal Makeup</option><option value="engagement">Engagement Makeup</option><option value="party">Party Makeup</option><option value="photoshoot">Photoshoot Makeup</option><option value="basic">Basic Makeup</option><option value="hair">Hair Styling</option></select></fieldset><button class="apply-filters" type="submit">Apply filters</button><p id="price-filter-note" role="status"></p></form></li></nav>
+        <div class="top-actions"><span class="location-label">⌖ Patna, Bihar⌄</span><a class="login-button"
+                href="login.html">Login / Sign Up</a></div>
+    </header>
+    <main id="top">
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="hero-logo"><span class="logo-mark">M</span><span>Makeup<span>wala</span></span></div>
+                <h1>Professional Makeup Artist,<br><em>Ab Aapke Ghar Par!</em> <span class="heart-mark">♡</span></h1>
+                <p>Book trusted &amp; verified makeup artists<br>for any occasion at your convenience.</p>
+                <form class="artist-search" id="artist-search"><span>⌖</span><input id="location-input" type="search"
+                        placeholder="Enter your location" aria-label="Enter your location"><button type="submit">Find
+                        Makeup Artist</button></form>
+                <p class="search-note" id="search-note" role="status"></p>
+            </div>
+            <div class="hero-slider" id="hero-slider" aria-label="Makeupwala services and offers">
+                <div class="hero-slide active" role="img" aria-label="Makeup artist applying bridal makeup" style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Bridal Season</span><h2>Your dream look starts here</h2><p>Book a verified bridal artist at home.</p><a class="hero-ad-link" href="#artists">Book your artist</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Makeup brushes and cosmetics" style="background-image: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Beauty Essentials</span><h2>Tools for a flawless finish</h2><p>Discover products selected by professionals.</p><a class="hero-ad-link" href="#services">Explore services</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Traditional Indian bride getting ready" style="background-image: url('https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Glow Care</span><h2>Make room for your glow</h2><p>Get ready with a personalized beauty routine.</p><a class="hero-ad-link" href="#artists">Find an expert</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Lipstick and beauty products" style="background-image: url('https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">Party Ready</span><h2>Own every entrance</h2><p>Find a signature look for your next celebration.</p><a class="hero-ad-link" href="#artists">See artists</a></div>
+                </div>
+                <div class="hero-slide" role="img" aria-label="Makeup artist preparing a beauty look" style="background-image: url('https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85')">
+                    <div class="hero-ad"><span class="hero-ad-badge">At Your Doorstep</span><h2>Luxury beauty, made easy</h2><p>Professional makeup wherever you are.</p><a class="hero-ad-link" href="#booking">Book now</a></div>
+                </div>
+                <div class="slider-controls" aria-label="Slider controls">
+                    <button class="slider-dot active" type="button" aria-label="Show slide 1"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 2"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 3"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 4"></button>
+                    <button class="slider-dot" type="button" aria-label="Show slide 5"></button>
+                </div>
+            </div>
+            <div class="hero-benefits"><span>♢ Verified Artists</span><span>◷ On-Time Service</span><span>♧ Premium
+                    Products</span><span>♢ Safe &amp; Hygienic</span></div>
+        </section>
+        <section class="services-section" id="services">
+            <div class="section-title">
+                <h2>Our <em>Services</em></h2><span>♥</span>
+                <p>Make every moment beautiful</p>
+            </div>
+            <div class="service-grid"><a class="service-tile" href="#artists"><strong>♧</strong>
+                    <h3>Bridal Makeup</h3>
+                    <p>Look your best on your special day</p>
+                </a><a class="service-tile" href="#artists"><strong>◯</strong>
+                    <h3>Engagement Makeup</h3>
+                    <p>Shine on your engagement day</p>
+                </a><a class="service-tile" href="#artists"><strong>♕</strong>
+                    <h3>Party Makeup</h3>
+                    <p>Perfect look for parties &amp; get-togethers</p>
+                </a><a class="service-tile" href="#artists"><strong>▣</strong>
+                    <h3>Photoshoot Makeup</h3>
+                    <p>Flawless look for your special moments</p>
+                </a><a class="service-tile" href="#artists"><strong>◖</strong>
+                    <h3>Basic Makeup</h3>
+                    <p>Elegant everyday makeup</p>
+                </a><a class="service-tile" href="#artists"><strong>♙</strong>
+                    <h3>Hair Styling</h3>
+                    <p>Beautiful hairstyles for every look</p>
+                </a></div>
+        </section>
+        <section class="how-section" id="how-it-works">
+            <div class="section-title">
+                <h2>How <em>It Works</em></h2><span>♥</span>
+            </div>
+            <div class="steps">
+                <div class="step"><b>⌕</b><strong>1. Search</strong>
+                    <p>Search for makeup artists<br>near your location</p>
+                </div><i>⟶</i>
+                <div class="step"><b>♙</b><strong>2. Choose Artist</strong>
+                    <p>View profiles, reviews &amp;<br>choose your artist</p>
+                </div><i>⟶</i>
+                <div class="step"><b>▣</b><strong>3. Book</strong>
+                    <p>Select date, time &amp; book<br>your appointment</p>
+                </div><i>⟶</i>
+                <div class="step"><b>⌂</b><strong>4. Makeup at Home</strong>
+                    <p>Artist will come to your home<br>&amp; make you look beautiful</p>
+                </div>
+            </div>
+        </section>
+        <section class="artists-section" id="artists">
+            <div class="section-title inline-title">
+                <div>
+                    <h2>Featured <em>Artists</em></h2><span>♥</span>
+                </div><a href="#services">View All Artists&nbsp; ›</a>
+            </div>
+            <div class="artist-grid">
+                <article class="artist-card" data-price="1999" data-service="bridal"><img
+                        src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=600&q=85"
+                        alt="Riya Sharma makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Riya Sharma to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Riya Sharma</h3>
+                        <p>⭐ 4.8 (120) &nbsp; · &nbsp; 5 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.1,999</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="2499" data-service="engagement"><img
+                        src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=600&q=85"
+                        alt="Neha Singh makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Neha Singh to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Neha Singh</h3>
+                        <p>⭐ 4.9 (98) &nbsp; · &nbsp; 6 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.2,499</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="1799" data-service="party"><img
+                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=85"
+                        alt="Anjali Verma makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Anjali Verma to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Anjali Verma</h3>
+                        <p>⭐ 4.7 (76) &nbsp; · &nbsp; 4 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.1,799</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+                <article class="artist-card" data-price="2299" data-service="photoshoot"><img
+                        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=85"
+                        alt="Muskan Ansari makeup artist"><button class="favorite" type="button"
+                        aria-label="Add Muskan Ansari to favorites">♡</button>
+                    <div class="artist-info">
+                        <h3>Muskan Ansari</h3>
+                        <p>⭐ 4.8 (110) &nbsp; · &nbsp; 7 Years Exp.</p><small>⌖ Patna, Bihar</small>
+                        <div><span>Starting at <b>Rs.2,299</b></span><a href="#booking">Book Now</a></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="why-section" id="about">
+            <div class="section-title">
+                <h2>Why Choose <em>Makeupwala?</em></h2><span>♥</span>
+            </div>
+            <div class="why-grid">
+                <div><b>♢</b>
+                    <h3>Verified Artists</h3>
+                    <p>All artists are verified<br>&amp; background checked</p>
+                </div>
+                <div><b>⌂</b>
+                    <h3>Home Service</h3>
+                    <p>Enjoy luxury makeup<br>service at your home</p>
+                </div>
+                <div><b>☆</b>
+                    <h3>Top Rated</h3>
+                    <p>Highly rated by thousands<br>of happy customers</p>
+                </div>
+                <div><b>₹</b>
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden charges<br>what you see is what you pay</p>
+                </div>
+                <div><b>♧</b>
+                    <h3>Secure Booking</h3>
+                    <p>Your booking &amp; payment<br>are 100% secure</p>
+                </div>
+            </div>
+        </section>
+        <section class="reviews-section">
+            <div class="section-title">
+                <h2>What Our <em>Clients Say</em></h2><span>♥</span>
+            </div>
+            <div class="review-grid">
+                <blockquote>“<p>Amazing experience! The makeup artist was so professional and punctual. Loved the look.
+                        Highly recommended!</p>
+                    <footer><span>◉</span><b>— Pooja Verma<br><small>Patna</small></b></footer>
+                </blockquote>
+                <blockquote>“<p>Booked for my engagement and the makeup was absolutely perfect. Thank you Makeupwala!
+                    </p>
+                    <footer><span>◉</span><b>— Sneha Rani<br><small>Patna</small></b></footer>
+                </blockquote>
+                <blockquote>“<p>Very easy booking process and the artist came on time. Great service!</p>
+                    <footer><span>◉</span><b>— Aarti Kumari<br><small>Patna</small></b></footer>
+                </blockquote>
+            </div>
+        </section>
+        <section class="booking-anchor" id="booking">
+            <h2>Ready to look <em>beautiful?</em></h2>
+            <p>Find your trusted makeup artist today.</p><a class="pink-button"
+                href="mailto:support@makeupwala.com?subject=Makeup%20artist%20booking">Book an Artist&nbsp; ↗</a>
+        </section>
+    </main>
+    <footer class="site-footer" id="contact">
+        <div class="footer-brand"><a class="logo" href="#top"><span
+                    class="logo-mark">M</span><span>Makeup<span>wala</span></span></a>
+            <p>Professional makeup artists at your doorstep.<br>Book easily, look beautiful<br>&amp; shine on every
+                occasion.</p>
+            <div class="socials">◎ &nbsp; f &nbsp; ◉ &nbsp; ▶</div>
+        </div>
+        <div>
+            <h3>Quick Links</h3><a href="#top">Home</a><a href="#artists">Find Artist</a><a
+                href="#services">Services</a><a href="#how-it-works">How It Works</a><a href="#about">About Us</a><a
+                href="#contact">Contact</a>
+        </div>
+        <div>
+            <h3>Support</h3><a href="#contact">Help Center</a><a href="#contact">FAQs</a><a href="#contact">Terms &amp;
+                Conditions</a><a href="#contact">Privacy Policy</a><a href="#contact">Cancellation Policy</a><a
+                href="#contact">Refund Policy</a>
+        </div>
+        <div>
+            <h3>Contact Us</h3><a href="tel:+919123456789">⌕ &nbsp; +91 9204202630</a><a
+                href="mailto:support@makeupwala.com">▱ &nbsp; support@makeupwala.com</a><span>⌖ &nbsp; Patna, Bihar,
+                India</span>
+        </div>
+        <div class="copyright"><span>© 2024 Makeupwala. All Rights Reserved.</span><span>Made with <b>♥</b> for your
+                beauty</span></div>
+    </footer>
+    +
+    <script src="script.js"></script>
+    +
+</body>
++
+
+</html>
